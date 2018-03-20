@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import syhan.analysis.pilot.entity.JavaDependency;
 import syhan.analysis.pilot.store.JavaDependencyStore;
 import syhan.analysis.pilot.store.StoreConfig;
-import syhan.analysis.pilot.viewer.DependencyTreeViewer;
+import syhan.analysis.pilot.viewer.DependencyViewer;
 
 import java.util.List;
 
@@ -20,8 +20,12 @@ public class DependencyView {
         //List<JavaDependency> list = store.findByFromModule("nara.pavilion");
 
         // 특정 모듈이 참조하는 1단계 모듈 조회
-        List<JavaDependency> list = store.findByFromModule("nara.pavilion", 2);
+        //List<JavaDependency> list = store.findByFromModule("nara.pavilion", 2);
 
-        System.out.println(new DependencyTreeViewer(list).show());
+        // 특정 모듈이 참조하는 일부 모듈 조회
+        List<JavaDependency> list = store.findByFromModuleAndStartWithToModule("nara.pavilion", "nara");
+
+        System.out.println(new DependencyViewer(list).show());
+        System.out.println("total : " + list.size());
     }
 }

@@ -37,9 +37,9 @@ public class JavaDependencyStore {
         return javaDependencyRepository.findByFromModuleAndToLevel(fromModule, toLevel);
     }
 
-    public List<JavaDependency> findByFromModule(String fromModule, String toModule) {
+    public List<JavaDependency> findByFromModuleAndStartWithToModule(String fromModule, String toModule) {
         //
-        return javaDependencyRepository.findByFromModuleAndToModule(fromModule, toModule);
+        return javaDependencyRepository.findByFromModuleAndStartWithToModule(fromModule, toModule);
     }
 
     public boolean exists(String fromModule, String toModule) {

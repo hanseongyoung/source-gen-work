@@ -45,4 +45,22 @@ public class FileTest {
     public void testCreateDir() throws Exception {
         FileUtils.forceMkdir(new File("foo/bar/hello"));
     }
+
+    @Test
+    public void testStartWith() {
+        System.out.println("com.foo.bar".startsWith("")); // true
+        System.out.println("com.foo.bar".startsWith("com.")); // true
+        System.out.println("com.foo.bar".startsWith("com.foo.")); // true
+    }
+
+    @Test
+    public void testSubstring() {
+        String sample = "com.foo.bar";
+        int dotIndex = sample.indexOf(".");
+        System.out.println("dotIndex : " + dotIndex);
+        String subFront = sample.substring(0, dotIndex);
+        String subBack = sample.substring(dotIndex + 1);
+        System.out.println("front : " + subFront);
+        System.out.println("back  : " + subBack);
+    }
 }
