@@ -16,8 +16,12 @@ public class DependencyView {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(StoreConfig.class);
         JavaDependencyStore store = ctx.getBean(JavaDependencyStore.class);
 
-        List<JavaDependency> list = store.findByFromModule("com.foo.bar.dao");
-        //list.forEach(System.out::println);
+        // 특정 모듈이 참조하는 전체 모듈 조회
+        //List<JavaDependency> list = store.findByFromModule("nara.pavilion");
+
+        // 특정 모듈이 참조하는 1단계 모듈 조회
+        List<JavaDependency> list = store.findByFromModule("nara.pavilion", 2);
+
         System.out.println(new DependencyTreeViewer(list).show());
     }
 }

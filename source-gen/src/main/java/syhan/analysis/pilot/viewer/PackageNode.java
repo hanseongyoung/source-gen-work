@@ -78,7 +78,11 @@ public class PackageNode {
         if (parent == null || parent.name == null || parent.name.length() <= 0) {
             return name;
         }
-        return name.substring(parent.name.length());
+        String endedName = name.substring(parent.name.length());
+        if (endedName.startsWith(".")) {
+            endedName = endedName.substring(1);
+        }
+        return endedName;
     }
 
     public String show(String prefix) {

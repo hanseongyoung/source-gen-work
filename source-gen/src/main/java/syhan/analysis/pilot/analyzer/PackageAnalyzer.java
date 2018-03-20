@@ -1,5 +1,7 @@
 package syhan.analysis.pilot.analyzer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import syhan.analysis.pilot.config.AnalysisConfiguration;
 import syhan.analysis.pilot.store.JavaDependencyStore;
 
@@ -15,6 +17,7 @@ public class PackageAnalyzer implements Analyzer {
     //
     private AnalysisConfiguration configuration;
     private JavaDependencyStore store;
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     public PackageAnalyzer(AnalysisConfiguration configuration, JavaDependencyStore store) {
         //
@@ -45,6 +48,7 @@ public class PackageAnalyzer implements Analyzer {
             } catch (IOException e) {
                 // TODO : 파일 로깅 처리하고 계속 진행함.
                 e.printStackTrace();
+                logger.error(e.getMessage());
             }
         };
     }

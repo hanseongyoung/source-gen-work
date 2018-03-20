@@ -13,16 +13,20 @@ public class JavaDependency {
     @Id
     private String id;
     private String fromModule;
+    private int fromLevel;
     private String toModule;
+    private int toLevel;
 
     public JavaDependency() {
     }
 
-    public JavaDependency(String fromModule, String toModule) {
+    public JavaDependency(String fromModule, int fromLevel, String toModule, int toLevel) {
         //
         this.id = UUID.randomUUID().toString();
         this.fromModule = fromModule;
+        this.fromLevel = fromLevel;
         this.toModule = toModule;
+        this.toLevel = toLevel;
     }
 
     public String getId() {

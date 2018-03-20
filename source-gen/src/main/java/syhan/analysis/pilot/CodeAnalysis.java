@@ -9,8 +9,9 @@ import syhan.analysis.pilot.store.JavaDependencyStore;
 import syhan.analysis.pilot.store.StoreConfig;
 
 public class CodeAnalysis {
-    private static final String SOURCE_PATH = "/Users/daniel/Documents/work/source_gen/source-gen-work/source-project";
-
+    //private static final String SOURCE_PATH = "/Users/daniel/Documents/work/source_gen/source-gen-work/source-project";
+    private static final String SOURCE_PATH = "/Users/daniel/Documents/work/namooio/git_temp/nara-platform/pavilion/pavilion-service";
+// /Users/daniel/Documents/work/namooio/git_temp/nara-platform/pavilion/pavilion-service/src/main/java/nara
     public static void main(String[] args) throws Exception {
         //
         ApplicationContext ctx = new AnnotationConfigApplicationContext(StoreConfig.class);
@@ -24,7 +25,7 @@ public class CodeAnalysis {
 
         // 2. package analyze
         Analyzer analyzer = new PackageAnalyzer(configuration, store);
-        analyzer.analyze("com.foo");
+        analyzer.analyze("nara.pavilion");
         System.out.println("### Complete analyze ###");
 
         //

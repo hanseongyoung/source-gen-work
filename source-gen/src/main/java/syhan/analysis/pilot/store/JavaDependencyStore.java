@@ -18,15 +18,28 @@ public class JavaDependencyStore {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public void create(String fromModule, String toModule) {
+    public void create(String fromModule, int fromLevel, String toModule, int toLevel) {
         //
-        JavaDependency javaDependency = new JavaDependency(fromModule, toModule);
+        JavaDependency javaDependency = new JavaDependency(fromModule, fromLevel, toModule, toLevel);
         javaDependencyRepository.save(javaDependency);
     }
 
     public List<JavaDependency> findByFromModule(String fromModule) {
         //
         return javaDependencyRepository.findByFromModule(fromModule);
+    }
+
+    public List<JavaDependency> findByFromModule(String fromModule, int toLevel) {
+        //
+        if (toLevel <= 0) {
+            return javaDependencyRepository.findByFromModule(fromModule);
+        }
+        return javaDependencyRepository.findByFromModuleAndToLevel(fromModule, toLevel);
+    }
+
+    public List<JavaDependency> findByFromModule(String fromModule, String toModule) {
+        //
+        return javaDependencyRepository.findByFromModuleAndToModule(fromModule, toModule);
     }
 
     public boolean exists(String fromModule, String toModule) {
