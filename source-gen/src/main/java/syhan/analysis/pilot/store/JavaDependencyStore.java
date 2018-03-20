@@ -42,6 +42,11 @@ public class JavaDependencyStore {
         return javaDependencyRepository.findByFromModuleAndStartWithToModule(fromModule, toModule);
     }
 
+    public List<JavaDependency> findByFromModuleAndStartWithToModule(String fromModule, String toModule, int toLevel) {
+        //
+        return javaDependencyRepository.findByFromModuleAndStartWithToModule(fromModule, toModule, toLevel);
+    }
+
     public boolean exists(String fromModule, String toModule) {
         //
         return javaDependencyRepository.countByFromModuleAndAndToModule(fromModule, toModule) > 0;

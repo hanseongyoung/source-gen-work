@@ -16,4 +16,7 @@ public interface JavaDependencyRepository extends CrudRepository<JavaDependency,
 
     @Query("SELECT c FROM JavaDependency c WHERE c.fromModule = :fromModule AND c.toModule LIKE :toModule%")
     List<JavaDependency> findByFromModuleAndStartWithToModule(@Param("fromModule") String fromModule, @Param("toModule") String toModule);
+
+    @Query("SELECT c FROM JavaDependency c WHERE c.fromModule = :fromModule AND c.toLevel = :toLevel AND c.toModule LIKE :toModule%")
+    List<JavaDependency> findByFromModuleAndStartWithToModule(@Param("fromModule") String fromModule, @Param("toModule") String toModule, @Param("toLevel") int toLevel);
 }
