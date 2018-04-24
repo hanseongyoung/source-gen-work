@@ -11,41 +11,29 @@ import java.io.IOException;
 
 public class JavaSource {
     //
-    private String physicalSourceFile;
-    private String fileName;
     private CompilationUnit compilationUnit;
 
     public JavaSource(String physicalSourceFile) throws FileNotFoundException {
         //
-        this.physicalSourceFile = physicalSourceFile;
-        this.fileName = new File(physicalSourceFile).getName();
         this.compilationUnit = JavaParser.parse(new FileInputStream(physicalSourceFile));
     }
 
-    public void write(String targetPathName) throws IOException {
+    public JavaSource(CompilationUnit compilationUnit) {
         //
-        File file = new File(targetPathName);
+        this.compilationUnit = compilationUnit;
+    }
+
+    public String getSourceFilePath() {
+        //
+        String packageName = compilationUnit.getPackageDeclaration().get().getNameAsString();
+        String typeName = compilationUnit.getType(0).getNameAsString();
+        return packageName.replaceAll("\\.", File.separator) + File.separator + typeName + ".java";
+    }
+
+    public void write(String physicalTargetFilePath) throws IOException {
+        //
+        File file = new File(physicalTargetFilePath);
+        System.out.println(compilationUnit.toString());
         FileUtils.writeStringToFile(file, compilationUnit.toString(), "UTF-8");
-    }
-
-    public String getFileName() {
-        //
-        return fileName;
-    }
-
-    public String getPhysicalSourceFile() {
-        //
-        return physicalSourceFile;
-    }
-
-    public static void createDir(File dir) {
-        //
-        try {
-            System.out.println("dir:"+dir);
-            FileUtils.forceMkdir(dir);
-        } catch (IOException e) {
-            // TODO
-            e.printStackTrace();
-        }
     }
 }

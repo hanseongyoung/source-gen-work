@@ -1,7 +1,5 @@
 package syhan.sourcegen.pilot.config;
 
-import syhan.sourcegen.pilot.source.JavaSource;
-
 import java.io.File;
 
 public class ConvertConfiguration {
@@ -22,16 +20,15 @@ public class ConvertConfiguration {
     // physicalSourceFile   : 소스가 되는 File 의 물리적 절대경로                 : C://Users/user/Documents/.../src/main/java/com/foo/bar/SampleService.java
     // physicalSourceFilePath   : 소스가 되는 Path or File 의 물리적 절대경로
 
-    public ConvertConfiguration(String sourceHomePath, String targetHomeName) {
+    public ConvertConfiguration(String sourceHomePath, String targetHomePath) {
         //
         this.physicalSourcePrefix = sourceHomePath + PATH_DELIM + sourceJavaFolder + PATH_DELIM;
-        this.physicalTargetPrefix = targetHomeName + PATH_DELIM + targetJavaFolder + PATH_DELIM;
+        this.physicalTargetPrefix = targetHomePath + PATH_DELIM + targetJavaFolder + PATH_DELIM;
     }
 
-    public String getPhysicalTargetFilePath(JavaSource source) {
+    public String getPhysicalTargetFilePath(String targetFilePath) {
         //
-        String sourceFile = getSourceFilePath(source.getPhysicalSourceFile());
-        return physicalTargetPrefix + sourceFile;
+        return physicalTargetPrefix + targetFilePath;
     }
 
     public String getPhysicalSourceFilePath(String sourceFilePath) {

@@ -16,22 +16,27 @@ public class JavaConverter implements Converter {
     }
 
     @Override
-    public void convert(String sourceFile) throws IOException {
+    public void convert(String sourceFilePath) throws IOException {
         // sourceFile : com/foo/bar/SampleService.java
-        String physicalSourceFile = configuration.getPhysicalSourceFilePath(sourceFile);
-        JavaSource source = readSource(physicalSourceFile);
+        System.out.println("sourceFilePath:"+sourceFilePath);
+        String physicalSourceFilePath = configuration.getPhysicalSourceFilePath(sourceFilePath);
+        System.out.println("physicalSourceFilePath:"+physicalSourceFilePath);
+        JavaSource source = readSource(physicalSourceFilePath);
 
-        String targetPathName = configuration.getPhysicalTargetFilePath(source);
-        writeSource(source, targetPathName);
+        String targetFilePath = sourceFilePath;
+        System.out.println("targetFilePath:"+targetFilePath);
+        String physicalTargetFilePath = configuration.getPhysicalTargetFilePath(targetFilePath);
+        System.out.println("physicalTargetFilePath:"+physicalTargetFilePath);
+        writeSource(source, physicalTargetFilePath);
     }
 
-    private JavaSource readSource(String physicalSourceFile) throws FileNotFoundException {
+    private JavaSource readSource(String physicalSourceFilePath) throws FileNotFoundException {
         //
-        return new JavaSource(physicalSourceFile);
+        return new JavaSource(physicalSourceFilePath);
     }
 
-    private void writeSource(JavaSource source, String targetPathName) throws IOException {
+    private void writeSource(JavaSource source, String physicalTargetFilePath) throws IOException {
         //
-        source.write(targetPathName);
+        source.write(physicalTargetFilePath);
     }
 }
